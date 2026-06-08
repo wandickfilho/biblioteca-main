@@ -12,14 +12,14 @@ public class Menu {
 	        int opcao;
 
 	        do {
-
+	        	System.out.println("\n=======Menu=======");
 	            System.out.println("\n1 - Cadastrar Livro");
 	            System.out.println("2 - Listar Catalogo");
 	            System.out.println("3 - Buscar Livro");
 	            System.out.println("4 - Emprestar Livro");
 	            System.out.println("5 - Devolver Livro");
 	            System.out.println("0 - Sair");
-
+	            System.out.print("\nEscolha uma Opção: ");
 	            opcao = sc.nextInt();
 
 	            switch (opcao) {
