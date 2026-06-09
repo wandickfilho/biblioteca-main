@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    private Livro[] livros = new Livro[100];
+    private Livro[] livros = new Livro[5];
     private int quantidade = 0;
 
     private void cadastrarLivro(Livro livro) {
