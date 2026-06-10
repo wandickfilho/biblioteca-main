@@ -1,18 +1,23 @@
 package Projeto;
+
 import java.util.Scanner;
 
 public class Menu {
 
-    private Livro[] livros = new Livro[5];
-    private int quantidade = 0;
+    Livro[] livros = new Livro[10];
+    int quantidade = 0;
 
-    private void cadastrarLivro(Livro livro) {
-        livros[quantidade] = livro;
-        quantidade++;
-        System.out.println("Livro cadastrado!");
+    void cadastrarLivro(Livro livro) {
+        if (quantidade < livros.length) {
+            livros[quantidade] = livro;
+            quantidade++;
+            System.out.println("Livro cadastrado!");
+        } else {
+            System.out.println("Catalogo cheio!");
+        }
     }
 
-    private void listarLivros() {
+    void listarLivros() {
         if (quantidade == 0) {
             System.out.println("Nenhum livro cadastrado.");
         } else {
@@ -22,18 +27,19 @@ public class Menu {
         }
     }
 
-    private Livro buscarLivro(int id) {
+    Livro buscarLivro(int id) {
         for (int i = 0; i < quantidade; i++) {
-            if (livros[i].getId() == id) {
+            if (livros[i].id == id) {
                 return livros[i];
             }
         }
         return null;
     }
 
-    private void emprestarLivro(int id) {
+    void emprestarLivro(int id) {
         Livro livro = buscarLivro(id);
-        if (livro != null && livro.getEstoque() > 0) {
+
+        if (livro != null && livro.estoque > 0) {
             livro.diminuirEstoque();
             System.out.println("Livro emprestado!");
         } else {
@@ -41,8 +47,9 @@ public class Menu {
         }
     }
 
-    private void devolverLivro(int id) {
+    void devolverLivro(int id) {
         Livro livro = buscarLivro(id);
+
         if (livro != null) {
             livro.aumentarEstoque();
             System.out.println("Livro devolvido!");
@@ -51,31 +58,38 @@ public class Menu {
         }
     }
 
-    public void iniciar() {
+    void iniciar() {
+
         Scanner sc = new Scanner(System.in);
         int opcao;
 
         do {
-            System.out.println("\n=======Menu=======");
-            System.out.println("\n1 - Cadastrar Livro");
+            System.out.println("\n===== MENU =====");
+            System.out.println("1 - Cadastrar Livro");
             System.out.println("2 - Listar Catalogo");
             System.out.println("3 - Buscar Livro");
             System.out.println("4 - Emprestar Livro");
             System.out.println("5 - Devolver Livro");
             System.out.println("0 - Sair");
-            System.out.print("\nEscolha uma Opcao: ");
+            System.out.print("Escolha uma opcao: ");
+
             opcao = sc.nextInt();
 
             switch (opcao) {
+
                 case 1:
                     System.out.print("ID: ");
                     int id = sc.nextInt();
                     sc.nextLine();
+
                     System.out.print("Titulo: ");
                     String titulo = sc.nextLine();
+
                     System.out.print("Estoque: ");
                     int estoque = sc.nextInt();
-                    cadastrarLivro(new Livro(id, titulo, estoque));
+
+                    Livro livro = new Livro(id, titulo, estoque);
+                    cadastrarLivro(livro);
                     break;
 
                 case 2:
@@ -85,7 +99,9 @@ public class Menu {
                 case 3:
                     System.out.print("ID do livro: ");
                     id = sc.nextInt();
-                    Livro livro = buscarLivro(id);
+
+                    livro = buscarLivro(id);
+
                     if (livro != null) {
                         System.out.println(livro);
                     } else {
@@ -114,6 +130,7 @@ public class Menu {
             }
 
         } while (opcao != 0);
+
         sc.close();
     }
 }
