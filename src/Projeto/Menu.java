@@ -51,9 +51,15 @@ public class Menu {
         Livro livro = buscarLivro(id);
 
         if (livro != null) {
+        	if (livro.emprestados > 0) {
             livro.aumentarEstoque();
             System.out.println("Livro devolvido!");
-        } else {
+        	}
+        	else {
+                System.out.println("Nenhum exemplar emprestado!");
+        	}
+        }
+        else {
             System.out.println("Livro nao encontrado.");
         }
     }
